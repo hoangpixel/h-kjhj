@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .product-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .product-detail h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-detail p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-detail">
+        <h1 id="product-name"></h1>
+        <img id="product-image" src="" alt="">
+        <p id="product-price"></p>
+        <p id="product-description"></p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id'); // Lấy ID từ URL
+
+        // Giả sử bạn có mảng sản phẩm toàn bộ
+        const products = [
+            { id: 1, name: 'Sản phẩm 1', price: '100000', description: 'Mô tả sản phẩm 1', image: 'product1.jpg' },
+            { id: 2, name: 'Sản phẩm 2', price: '200000', description: 'Mô tả sản phẩm 2', image: 'product2.jpg' },
+            // Các sản phẩm khác
+        ];
+
+        // Tìm sản phẩm theo ID
+        const product = products.find(p => p.id == productId);
+
+        if (product) {
+            // Hiển thị thông tin sản phẩm
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-price').textContent = `Giá: ${product.price} VND`;
+            document.getElementById('product-description').textContent = product.description;
+        } else {
+            document.querySelector('.product-detail').innerHTML = '<p>Sản phẩm không tồn tại.</p>';
+        }
+    </script>
+</body>
+</html>

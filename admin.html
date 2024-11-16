@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Nhập Dữ Liệu Sản Phẩm</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { margin: 10px 0; padding: 10px; width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Nhập Dữ Liệu Sản Phẩm</h1>
+    <form id="productForm">
+        <input type="text" name="productName" id="productName" placeholder="Tên sản phẩm" required />
+        <input type="number" name="productPrice" id="productPrice" placeholder="Giá sản phẩm" required />
+        <input type="text" name="productDescription" id="productDescription" placeholder="Mô tả sản phẩm" required />
+        <input type="text" name="productImage" id="productImage" placeholder="Đường dẫn ảnh sản phẩm" />
+        <button type="submit">Thêm sản phẩm</button>
+    </form>
+
+    <script>
+        // Lắng nghe sự kiện submit của form
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngừng gửi form truyền thống
+
+            // Lấy dữ liệu từ form
+            const formData = new FormData(this);
+
+            // Tạo yêu cầu AJAX
+            fetch('process_product.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text()) // Nhận phản hồi từ PHP
+            .then(data => {
+                alert(data); // Hiển thị thông báo từ PHP (có thể là thông báo thành công hoặc lỗi)
+                // Bạn có thể làm mới lại form hoặc làm điều gì đó sau khi gửi
+            })
+            .catch(error => {
+                console.error('Lỗi khi gửi form:', error);
+            });
+        });
+    </script>
+</body>
+</html>
